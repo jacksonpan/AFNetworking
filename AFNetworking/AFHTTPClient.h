@@ -389,6 +389,7 @@ typedef enum {
          success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
+- (void)postPath:(NSString *)path parameters:(NSDictionary *)parameters data:(NSData*)data dataName:(NSString*)dataName dataMimeType:(NSString*)dataMimeType success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure progress:(void(^)(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite))progress;
 /**
  Creates an `AFHTTPRequestOperation` with a `PUT` request, and enqueues it to the HTTP client's operation queue.
 
