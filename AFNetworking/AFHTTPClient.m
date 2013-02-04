@@ -633,18 +633,6 @@ static void AFNetworkReachabilityReleaseCallback(const void *info) {
     [self enqueueHTTPRequestOperation:operation];
 }
 
-- (void)postPath:(NSString *)path parameters:(NSDictionary *)parameters data:(NSData*)data dataName:(NSString*)dataName dataMimeType:(NSString*)dataMimeType success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure progress:(void(^)(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite))progress
-{
-    NSMutableURLRequest *request = [self multipartFormRequestWithMethod:@"POST" path:path parameters:parameters constructingBodyWithBlock: ^(id formData) {
-        [formData appendPartWithFileData:data name:dataName fileName:dataName mimeType:dataMimeType];
-    }];
-    AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:success failure:failure];
-    [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
-        progress(bytesWritten, totalBytesWritten, totalBytesExpectedToWrite);
-    }];
-    [self enqueueHTTPRequestOperation:operation];
-}
-
 - (void)putPath:(NSString *)path
      parameters:(NSDictionary *)parameters
         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
